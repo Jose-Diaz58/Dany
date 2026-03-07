@@ -1,4 +1,5 @@
 import React from 'react'
+<<<<<<< HEAD
 import {useState} from "react";
 import { MenuLateral } from '../../components'
  
@@ -14,6 +15,15 @@ export function AdminLayout({children}) {
             <div className='max-w-7xl'>{children}</div>
           </main>
         </div>
+=======
+import { MenuLateral } from '../../components'
+ 
+export function AdminLayout({children}) {
+  return (
+    <div>
+      <MenuLateral/>
+      {children}
+>>>>>>> 93a86136f8e353606641fb404233cbb304a350dc
     </div>
   )
 }
