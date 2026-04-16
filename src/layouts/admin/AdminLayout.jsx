@@ -1,7 +1,6 @@
 import React from 'react'
-<<<<<<< HEAD
 import {useState} from "react";
-import { MenuLateral } from '../../components'
+import { MenuLateral, Header } from '../../components'
  
 export function AdminLayout({children}) {
   const [sideBar, setsideBar] = useState(false)
@@ -11,19 +10,11 @@ export function AdminLayout({children}) {
     <div className="flex h-screen bg-slate-50 overflow-hidden text-slate-900">
       <MenuLateral isOpen={sideBar} toggleSidebar={toggleSidebar}/>
         <div className='flex-1 flex-col min-w-0 overflow-hidden'>
+          <Header userName="Jose Luis" toggleSidebar={toggleSidebar }/>
           <main className='flex-1 overflow-y-auto p-4 lg:p-8'>
             <div className='max-w-7xl'>{children}</div>
           </main>
         </div>
-=======
-import { MenuLateral } from '../../components'
- 
-export function AdminLayout({children}) {
-  return (
-    <div>
-      <MenuLateral/>
-      {children}
->>>>>>> 93a86136f8e353606641fb404233cbb304a350dc
     </div>
   )
 }
