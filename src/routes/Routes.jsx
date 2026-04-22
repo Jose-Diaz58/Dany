@@ -1,8 +1,9 @@
 import React from 'react'
-import {Routes,Route} from "react-router";
+import {Routes,Route, Navigate} from "react-router";
 import{Home,Gestion, Dashoard}from "../pages"
 import { AdminLayout } from '../layouts';
-
+import { FormPersona } from '../components/persona'
+ 
  function Rutas() {
 
   const LoadedLayout=(Layout, Page)=>{
@@ -16,7 +17,8 @@ import { AdminLayout } from '../layouts';
     <Routes>  
       <Route path='/' element={LoadedLayout(AdminLayout,Dashoard)}/>
       <Route path='/home' element={LoadedLayout(AdminLayout,Home)}/>
-      <Route path='/Gestion' element={LoadedLayout(AdminLayout,Gestion)}/>
+      <Route path='/persona' element={LoadedLayout(AdminLayout,FormPersona)}/>
+      <Route path='*' element={<Navigate to="/" />}/>
     </Routes>
   )
 }

@@ -6,7 +6,7 @@ export function MenuLateral({isOpen, toggleSidebar}) {
   const menuItems=[
     {name: "Dashboard",path:"/", icon:<LayoutDashboard size={20}/>},
     {name: "Home",path:"/home", icon:<Home size={20}/>},
-    {name: "Gestion",path:"/gestion", icon:<Settings size={20}/>}
+    {name: "Personas",path:"/persona", icon:<Settings size={20}/>}
   ]
 
   return (

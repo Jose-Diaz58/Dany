@@ -3,6 +3,7 @@ import {useState, useEffect} from "react";
 import Axios from "axios";
 import DatosDB from "../../services/ApiDatos";
 import Swal from "sweetalert2"
+import { useNavigate } from 'react-router';
 
 export function Dashoard() {
   const [datos, setDatos] = useState([])
@@ -12,6 +13,7 @@ export function Dashoard() {
     { id: 3, label: 'Promedio de estudiantes de EMS', value: '8.5', icon: <Activity />, color: 'emerald' },
   ];*/
 
+  const navigate=useNavigate();
   const datosBd = async()=>{
     const datosbd = await DatosDB.getDatos();
     setDatos(datosbd.data);
@@ -20,25 +22,33 @@ export function Dashoard() {
 
   const eliminarDatos = async(id)=>{
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    }).then(async (result) => {
+    title: "¿Estás seguro de eliminar este dato?",
+    text: "Se borrará de la BD",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, eliminar",
+    cancelButtonText: "Cancelar"
+  }).then(async (result) => { 
     if (result.isConfirmed) {
-      await DatosDB.deleteDatos(id);
-      Swal.fire({
-        title: "Deleted!",
-        text: "Your file has been deleted.",
-        icon: "success"
-      });
-      
-      datosBd(); 
+      try {
+        await DatosDB.deleteDatos(id);
+        datosBd();
+        Swal.fire({
+          title: "¡Eliminado!",
+          text: "El registro ha sido borrado con éxito.",
+          icon: "success"
+        });
+      } catch (error) {
+        Swal.fire({
+          title: "Error",
+          text: "No se pudo eliminar el registro.",
+          icon: "error"
+        });
+      }
     }
-  });
+  })
 }
 
   useEffect(() => {
@@ -68,9 +78,9 @@ export function Dashoard() {
       {/* Tabla de últimas consultas */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="p-6 border-b border-gray-50 flex justify-between items-center">
-          <h2 className="font-bold text-slate-800">Últimas Visitas a EMS</h2>
-          <button className="text-blue-600 text-xs font-bold flex items-center hover:underline">
-            VER TODO <ChevronRight size={14} />
+          <h2 className="font-bold text-slate-800">Personas</h2>
+          <button type="button" onClick={()=>navigate("/persona")} className="text-blue-600 text-xs font-bold flex items-center hover:underline">
+            Formulario de persona
           </button>
         </div>
         <div className="overflow-x-auto">
